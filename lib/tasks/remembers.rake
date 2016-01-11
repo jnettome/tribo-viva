@@ -37,4 +37,17 @@
     end
     puts "FIM === \n\n"
   end
+
+  desc 'Remember users of week offers'
+  task week_offers: :environment do
+    puts '=== ENVIANDO EMAILS COM OFERTAS DA SEMANA'
+    if Date.today.wday == 4
+      offers = Offer.where(collect_starts_at: Date.today.beginning_of_day..Date.today.next_week.end_of_day)
+      offers = offers.select{ |offer| offer.remaining > 0 }
+      User.find_each do |user|
+        Remembers.week_offers(user, offers).deliver_now
+      end
+    end
+    puts 'FIM OFERTAS SEMANA ==='
+  end
 end

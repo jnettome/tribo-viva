@@ -39,4 +39,10 @@ class Remembers < ApplicationMailer
     @day = Date.today
     mail to: user.email, subject: "Lembrete de coleta Tribo Viva"
   end
+
+  def week_offers(user, offers)
+    @user = user
+    @offers = offers
+    mail to: user.email, subject: 'Lembrete de ofertas Tribo Viva'
+  end
 end

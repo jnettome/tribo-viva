@@ -1,0 +1,21 @@
+p Olá #{@user.name}
+
+p Este é um lembrete de ofertas da semana, confira:
+
+- @offers.each do |offer|
+  div
+    h2 = link_to offer.title, offer_url(offer)
+    == offer.description
+    = ActionController::Base.helpers.number_to_currency offer.total
+  hr
+
+
+p PARCEIRO DE ENTREGAS
+
+p
+  | A Tribo Viva conta com um parceiro de entregas, caso você necessite de um.
+  br
+  | Para mais informações, visite <%= delivery_url %>
+
+p Atenciosamente,
+p Tribo Viva - (51) 9205.6715
